@@ -53,4 +53,4 @@ jobs:
         app-name: 'portaltelemedicinawebclientteste'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_94e22a35d80e411dbaaec5b1d06229e4 }}
-        package: .
+        package: ./dist/portaltelemedicinawebclientteste
