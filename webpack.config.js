@@ -46,7 +46,8 @@ module.exports = {
         new webpack.DefinePlugin({
             // global app config object
             config: JSON.stringify({
-                apiUrl: 'https://localhost:44386'
+                // apiUrl: 'https://localhost:44386'
+                apiUrl: 'https://portaltelemedicinaapim.azure-api.net/v1'
             })
         }),
 
@@ -57,7 +58,7 @@ module.exports = {
         ),
         new SourceMapDevToolPlugin({
             filename: "[file].map"
-          })
+        })
     ],
     optimization: {
         splitChunks: {
