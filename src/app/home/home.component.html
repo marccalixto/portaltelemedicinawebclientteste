@@ -1,0 +1,10 @@
+﻿<h1>Olá, {{currentUser.user.displayName}}!</h1>
+<h3>Selecione uma opção:</h3>
+<div class="form-group">
+    <!-- <button [routerLink]="['/produtos']" class="btn btn-secondary">Produtos</button>
+    <button [routerLink]="['/vendas']" class="btn btn-secondary">Vendas</button> -->
+
+    <a [routerLink]="['/produtos']" class="btn btn-sm btn-info text-white">Produtos</a>
+    <a [routerLink]="['/vendas']" class="btn btn-sm btn-danger text-white">Vendas</a>
+
+</div>

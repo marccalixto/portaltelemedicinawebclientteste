@@ -1,0 +1,99 @@
+<h2>Venda</h2>
+
+<hr />
+
+<form [formGroup]="vendaForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <!-- <mat-form-field>
+            <input matInput [matDatepicker]="dp3" placeholder="Input disabled" disabled readonly
+                [formControl]="f.creationDate">
+            <mat-datepicker-toggle matSuffix [for]="dp3" disabled></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled></mat-datepicker>
+        </mat-form-field> -->
+
+        <!-- <div class="col-sm-6">
+            <label for="creationDate">Data</label>
+            <input type="text" formControlName="creationDate" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.creationDate.errors }" />
+            <div *ngIf="submitted && f.creationDate.errors" class="invalid-feedback">
+                <div *ngIf="f.creationDate.errors.required">Data obrigatória</div>
+            </div>
+        </div> -->
+        <!-- <div class="col-sm-6">
+            <label for="totalValue">Valor total</label>
+            <input disabled type="text" [value]="vendaForm.get('totalValue').value | currency:'BRL':'symbol'"
+                formControlName="totalValue" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.totalValue.errors }" />
+            <div *ngIf="submitted && f.totalValue.errors" class="invalid-feedback">
+                <div *ngIf="f.totalValue.errors.required">Valor total obrigatório</div>
+                <div *ngIf="f.totalValue.errors.min">Valor total deve ser maior que 0,00 (Zero)</div>
+            </div>
+        </div> -->
+        <div class="form-group row">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-2">
+                <label for="totalValue">Valor total</label>
+            </div>
+            <div class="col-sm-4">
+                <input disabled type="text" [value]="vendaForm.get('totalValue').value | currency:'BRL':'symbol'"
+                    formControlName="totalValue" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.totalValue.errors }" />
+                <div *ngIf="submitted && f.totalValue.errors" class="invalid-feedback">
+                    <div *ngIf="f.totalValue.errors.required">Valor total obrigatório</div>
+                    <div *ngIf="f.totalValue.errors.min">Valor total deve ser maior que 0,00 (Zero)</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="form-group">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <table class="table table-stripped">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Valor unitário</th>
+                            <th>Qtdade</th>
+                            <th>Valor total</th>
+                            <th *ngIf="!detalhando">Ações</th>
+                            <th *ngIf="!detalhando"><a class="btn btn-sm btn-success text-white"
+                                    (click)="AddEditItem(null, vendaForm.get('id').value)"><i
+                                        class="fa fa-plus"></i>Inserir produto</a></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="produtosDaVenda.length == 0">
+                        <tr>
+                            <td colspan="5">Nenhum produto adicionado</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="produtosDaVenda.length > 0">
+                        <tr *ngFor="let item of produtosDaVenda; let i=index;">
+                            <td>{{item.produto.name}}</td>
+                            <td>{{item.price | currency:"BRL":"symbol"}}</td>
+                            <td>{{item.quantity }}</td>
+                            <td>{{item.price * item.quantity | currency:"BRL":"symbol"}}</td>
+                            <td colspan="2" *ngIf="!detalhando">
+                                <a class="btn btn-sm btn-info text-white"
+                                    (click)="AddEditItem(i, vendaForm.get('id').value)"><i
+                                        class="fa fa-pencil"></i>Editar</a>
+                                <a class="btn btn-sm btn-danger text-white"
+                                    (click)="deleteProdutoDaVenda(item.produto.id)"><i
+                                        class="fa fa-remove"></i>Remover</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <button [disabled]="loading" class="btn btn-primary" *ngIf="!detalhando">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Salvar
+    </button>
+    <button [routerLink]="['/vendas']" class="btn btn-secondary">Voltar</button>
+</form>

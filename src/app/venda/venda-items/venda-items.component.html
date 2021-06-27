@@ -1,0 +1,64 @@
+<h4 class="dispaly-4">Item da Venda</h4>
+<hr>
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  <input type="hidden" formControlName="orderItemId" class="form-control" />
+  <input type="hidden" formControlName="orderId" class="form-control" />
+  <input type="hidden" formControlName="itemName" class="form-control" />
+
+  <div class="form-group">
+    <label for="itemId">Produto</label>
+    <select name="itemId" formControlName="itemId" class="form-control" (change)="updatePrice($event.target)"
+      [ngClass]="{ 'is-invalid': submitted && f.itemId.errors }">
+      <option value="0">-Selecione-</option>
+      <option *ngFor="let item of produtoList" value="{{item.id}}">{{item.name}}</option>
+    </select>
+    <div *ngIf="submitted && f.itemId.errors" class="invalid-feedback">
+      <div *ngIf="f.itemId.errors.required">Produto obrigatório</div>
+      <div *ngIf="f.itemId.errors.min">Produto obrigatório </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Preço</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">R$</div>
+        </div>
+        <input name="price" formControlName="price" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.price.errors }" readonly>
+        <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+          <div *ngIf="f.price.errors.required">Preço deve ser informado</div>
+          <div *ngIf="f.price.errors.min">Preço deve ser maior que R$ 0,00 (Zero)</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Quantidade</label>
+      <input name="quantity" type="number" formControlName="quantity" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.quantity.errors }" (keyup)="updateTotal()">
+      <div *ngIf="submitted && f.quantity.errors" class="invalid-feedback">
+        <div *ngIf="f.quantity.errors.required">Quantidade obrigatória</div>
+        <div *ngIf="f.quantity.errors.min">Quantidade mínima de 1 item</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Total</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">R$</div>
+      </div>
+      <input name="total" formControlName="total" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.total.errors }" readonly>
+    </div>
+    <div *ngIf="submitted && f.total.errors" class="invalid-feedback">
+      <div *ngIf="f.total.errors.required">Valor total deve ser informado</div>
+      <div *ngIf="f.total.errors.min">Valor total deve ser maior que R$ 0,00 (Zero)</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Inserir Produto</button>
+    <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i>
+      Fechar</button>
+  </div>
+</form>

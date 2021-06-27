@@ -1,0 +1,22 @@
+<h2>Listagem de produtos</h2>
+
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Ações</th>
+            <th><a [routerLink]="['/produtos/info', 0]" class="btn btn-sm btn-success text-white"><i class="fa fa-plus"></i>Inserir produto</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of produtosFiltrados">
+            <td>{{item.name}}</td>
+            <td>{{item.price |currency:"BRL":"symbol"}}</td>
+            <td>
+                <a [routerLink]="['/produtos/info', item.id]" class="btn btn-sm btn-info text-white"><i class="fa fa-pencil"></i>Editar</a>
+                <a class="btn btn-sm btn-danger text-white" (click)="deleteById(item.id)"><i class="fa fa-remove"></i>Remover</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
