@@ -47,7 +47,7 @@ module.exports = {
             // global app config object
             config: JSON.stringify({
                 // apiUrl: 'https://localhost:44386'
-                apiUrl: 'https://portaltelemedicinawebapiapiv2.azure-api.net/v1'
+                apiUrl: 'https://portaltelemedicinanovoapimanagement.azure-api.net/v1'
             })
         }),
 
